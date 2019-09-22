@@ -10,11 +10,14 @@ class Checkbox extends React.Component {
       return null;
     }
     return (
-      <input
-        type="checkbox"
-        checked={this.props.client.checked}
-        onChange={() => this.props.onSelected(this.props.client)}
-      />
+      <div className="ui checkbox">
+        <input
+          type="checkbox"
+          checked={this.props.client.checked}
+          onChange={() => this.props.onSelected(this.props.client)}
+        />
+        <label key={this.props.client.id}>{this.props.client.name}</label>
+      </div>
     );
   }
 }

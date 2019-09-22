@@ -19,19 +19,26 @@ class App extends React.Component {
     }
     return (
       <div>
-        <MultiSelect
-          clients={this.props.clients}
-          onSelectionChange={this.onSelectionChange}
-        />
-        {this.props.clients
-          .filter(client => client.checked)
-          .map(client => {
-            return (
-              <div onClick={() => this.onSelectionChange(client)}>
-                {client.name}
-              </div>
-            );
-          })}
+        <div className="ui divided list">
+          <MultiSelect
+            clients={this.props.clients}
+            onSelectionChange={this.onSelectionChange}
+          />
+        </div>
+        <div class="ui blue labels">
+          {this.props.clients
+            .filter(client => client.checked)
+            .map(client => {
+              return (
+                <a
+                  class="ui label"
+                  onClick={() => this.onSelectionChange(client)}
+                >
+                  {client.name} <i class="icon close"></i>
+                </a>
+              );
+            })}
+        </div>
       </div>
     );
   }

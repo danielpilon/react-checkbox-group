@@ -16,10 +16,11 @@ class MultiSelect extends React.Component {
     return (
       <React.Fragment>
         {this.props.clients.map(client => (
-          <label key={client.id}>
-            {client.name}
-            <Checkbox client={client} onSelected={this.onSelected} />
-          </label>
+          <div className="item">
+            <div className="content">
+              <Checkbox client={client} onSelected={this.onSelected} />
+            </div>
+          </div>
         ))}
       </React.Fragment>
     );
