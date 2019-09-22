@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import MultiSelect from "./MultiSelect";
-import { fetchClients } from "../actions";
+import { fetchClients, toogleChecked as toggleChecked } from "../actions";
 
 class App extends React.Component {
   componentDidMount() {
@@ -10,6 +10,7 @@ class App extends React.Component {
 
   onSelectionChange = client => {
     console.log("onSelectionChange", client);
+    this.props.toogleChecked(client);
   };
 
   render() {
@@ -30,5 +31,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchClients }
+  { fetchClients, toogleChecked: toggleChecked }
 )(App);
