@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import MultiSelect from "./MultiSelect";
-import { fetchClients, toogleChecked as toggleChecked } from "../actions";
+import { fetchClients, toggleChecked } from "../actions";
 
 class App extends React.Component {
   componentDidMount() {
@@ -10,16 +10,28 @@ class App extends React.Component {
 
   onSelectionChange = client => {
     console.log("onSelectionChange", client);
-    this.props.toogleChecked(client);
+    this.props.toggleChecked(client);
   };
 
   render() {
+    if (!Array.isArray(this.props.clients)) {
+      return null;
+    }
     return (
       <div>
         <MultiSelect
           clients={this.props.clients}
           onSelectionChange={this.onSelectionChange}
         />
+        {this.props.clients
+          .filter(client => client.checked)
+          .map(client => {
+            return (
+              <div onClick={() => this.onSelectionChange(client)}>
+                {client.name}
+              </div>
+            );
+          })}
       </div>
     );
   }
@@ -31,5 +43,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { fetchClients, toogleChecked: toggleChecked }
+  { fetchClients, toggleChecked }
 )(App);
